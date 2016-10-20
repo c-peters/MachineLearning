@@ -11782,7 +11782,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[88]:</div>
+<div class="prompt input_prompt">In&nbsp;[2]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="c1"># Import libraries necessary for this project</span>
@@ -11835,7 +11835,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[89]:</div>
+<div class="prompt input_prompt">In&nbsp;[3]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="c1"># Display a description of the dataset</span>
@@ -11962,7 +11962,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[90]:</div>
+<div class="prompt input_prompt">In&nbsp;[4]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="c1"># TODO: Select three indices of your choice you wish to sample from the dataset</span>
@@ -12091,7 +12091,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[68]:</div>
+<div class="prompt input_prompt">In&nbsp;[5]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="c1"># TODO: Make a copy of the DataFrame, using the &#39;drop&#39; function to drop the given feature</span>
@@ -12201,7 +12201,7 @@ Delicatessen: -2.2547115372
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[5]:</div>
+<div class="prompt input_prompt">In&nbsp;[6]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="c1"># Produce a scatter matrix for each pair of features in the data</span>
@@ -14785,7 +14785,7 @@ KIqSMv8fleE3z1y+k70AAAAASUVORK5CYII=
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[6]:</div>
+<div class="prompt input_prompt">In&nbsp;[7]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="c1"># TODO: Scale the data using the natural logarithm</span>
@@ -20395,7 +20395,7 @@ oiiKoiiKomQB2sijKIqiKIqiKIqiKIqSBfx/ntL30or4NpYAAAAASUVORK5CYII=
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[7]:</div>
+<div class="prompt input_prompt">In&nbsp;[8]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="c1"># Display the log-transformed sample data</span>
@@ -20486,10 +20486,11 @@ Once you have performed this implementation, the dataset will be stored in the v
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[21]:</div>
+<div class="prompt input_prompt">In&nbsp;[12]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="c1"># For each feature find the data points with extreme high or low values</span>
+<span class="n">outliers</span> <span class="o">=</span> <span class="p">[]</span> 
 <span class="k">for</span> <span class="n">feature</span> <span class="ow">in</span> <span class="n">log_data</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
     
     <span class="c1"># TODO: Calculate Q1 (25th percentile of the data) for the given feature</span>
@@ -20509,6 +20510,8 @@ Once you have performed this implementation, the dataset will be stored in the v
     <span class="n">outliers</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">outlierData</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">tolist</span><span class="p">())</span>
     
 <span class="c1"># OPTIONAL: Select the indices for data points you wish to remove</span>
+<span class="n">outlierInTwoOrMoreFeatures</span> <span class="o">=</span> <span class="nb">set</span><span class="p">([</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">outliers</span> <span class="k">if</span> <span class="n">outliers</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">])</span>
+<span class="k">print</span> <span class="s2">&quot;Outliers in two or more features: {}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">outlierInTwoOrMoreFeatures</span><span class="p">)</span>
 <span class="n">outliers</span> <span class="o">=</span> <span class="p">[</span><span class="mi">95</span><span class="p">,</span><span class="mi">338</span><span class="p">,</span><span class="mi">75</span><span class="p">,</span><span class="mi">183</span><span class="p">]</span>
 
 <span class="c1"># Remove the outliers, if any were specified</span>
@@ -21147,6 +21150,13 @@ Boundaries for the outliers, Lower : 3.76959400251, Higher : 9.74900908097
 
 </div>
 
+<div class="output_area"><div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Outliers in two or more features: set([128, 65, 66, 75, 154])
+</pre>
+</div>
+</div>
+
 </div>
 </div>
 
@@ -21166,7 +21176,7 @@ Boundaries for the outliers, Lower : 3.76959400251, Higher : 9.74900908097
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p><strong>Answer:</strong> Yes there are 5 points which are outliers for more than one feature. This however does not necessarily mean that these points should be removed (Not for that reason). That is the data point could be consistently an outlier on multiple features (e.g. very high on grocery and very high on detergents &amp; paper) and still be relative easy to project with PCA. However because we have a relatively small sample set (~400) extreme low or high feature values could have a high impact on the PCA analysis. Therefore I manually selected a number of samples which I would consider outliers based upon the number of outliers in that region (density) and the distance from the boundaries (IQR). When the density is low and the distance from the boundary is high I removed the point.</p>
+<p><strong>Answer:</strong> Yes there are 5 points which are outliers for more than one feature, [65,66,75,128,154]. This however does not necessarily mean that these points should be removed (Not for that reason). That is the data point could be consistently an outlier on multiple features (e.g. very high on grocery and very high on detergents &amp; paper) and still be relative easy to project with PCA. However because we have a relatively small sample set (~400) extreme low or high feature values could have a high impact on the PCA analysis. Therefore I manually selected a number of samples which I would consider outliers based upon the number of outliers in that region (density) and the distance from the boundaries (IQR). When the density is low and the distance from the boundary is high I removed the point.</p>
 
 </div>
 </div>
@@ -23437,7 +23447,7 @@ kpQzBkKSJEmSJEk5YyAkSZIkSZKUM/8f0t/zLF5eAW8AAAAASUVORK5CYII=
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p><strong>Answer:</strong> The first customer segment (0) seems to represent food establishments (e.g. restaurants) while the second segment (1) seems to represent non-food establishments such as retail stores.</p>
+<p><strong>Answer:</strong> The first customer segment (0) have high values on Fresh (9398) and Frozen (2055) and low values for Grocery (2771), Milk (2134) and Detergents &amp; Paper (366) compared to other segment. Therefore it seems to represent food establishments (e.g. restaurants). The second segment (1) has high values for Groceries (12026),Detergents and Paper (4664) and Milk (7652) and low values on Fresh (3169) and Frozen (798) compared to the other segment. A customer who is assigned to Segment 1 is best identified non-food establishments such as retail stores.</p>
 
 </div>
 </div>
@@ -23582,7 +23592,7 @@ Sample point 2 predicted to be in Cluster 0
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p><strong>Answer:</strong> The change is more impactfull for segment 0 which orders a lot of the Fresh category which are likely not happy with this change. The wholesale distrutor could use the segmentation to only perform the change for Segment 1 (retail).</p>
+<p><strong>Answer:</strong> The change is more impactful for customers belonging to segment 0 who order a lot from the Fresh category. These customers are likely not happy with this change as Fresh goods preferably come in on a daily basis. The wholesale distributor could use the segmentation to its advantage when running A/B tests. It could only change the delivery service to 3 days a week for Segment 1 (Retail) and keep the service on 5 days a week for Segment 0 (Food Establishments)</p>
 
 </div>
 </div>
