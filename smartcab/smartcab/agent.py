@@ -16,23 +16,25 @@ class LearningAgent(Agent):
         self.color = 'red'  # override color
         self.planner = RoutePlanner(self.env, self)  # simple route planner to get next_waypoint
         
-	# TODO: Initialize any additional variables here
+	# Initialize any additional variables here
 	self.succesfull_trials = 0 # keep track of success rate
+	self.penalty = 0 # Keep track of number of penalties	
 	self.gamma = gamma # Discount Factor	
 	self.alpha = alpha # Learning Rate
 	self.epsilon = epsilon
 	self.actions = [None,'left','right','forward']
-	self.state_space = list(itertools.product(*[['green','red'],[True,False],[True,False],self.actions]))
+	self.actionsS = ['None','left','right','forward']
+	self.state_space = list(itertools.product(*[['green','red'],self.actionsS,self.actionsS,self.actionsS]))
 	self.QMatrix = pd.DataFrame(np.zeros((len(self.state_space),4)),
 	index= pd.MultiIndex.from_tuples(self.state_space,names=['light','Oncoming', 'Left','Waypoint']),columns=self.actions)	
 
     def get_current_state(self,inputs,waypoint):
-	return (inputs['light'],not(inputs['oncoming'] in ['right','forward']),not(inputs['left'] == 'forward'),waypoint)				
+	state = [inputs['light'],inputs['oncoming'],inputs['left'],waypoint]
+	return tuple(['None' if x == None else x for x in state])				
 	
     def updateQValue(self,old_state,action,new_state,reward):
 	newQValue = reward + self.gamma*np.max(self.QMatrix.loc[new_state])
-	self.QMatrix.loc[old_state][action] *= (1-self.alpha)
-	self.QMatrix.loc[old_state][action] += self.alpha*newQValue
+	self.QMatrix.loc[old_state][action] = (1-self.alpha)*self.QMatrix.loc[old_state][action] + self.alpha*newQValue
 
     def reset(self, destination=None):
         self.planner.route_to(destination)
@@ -59,6 +61,8 @@ class LearningAgent(Agent):
 	# Check if we have reached our destination
 	if(reward > 2):
 		self.succesfull_trials +=1
+	if(reward < 0):
+		self.penalty +=1
 
         # Learn policy based on state, action, reward
 	new_state = self.get_current_state(self.env.sense(self),self.planner.next_waypoint())
@@ -79,12 +83,13 @@ def run():
 		    # Now simulate it
 		    sim = Simulator(e, update_delay=.01, display=False)  # create simulator (uses pygame when display=True, if available)
 
-		    sim.run(n_trials=500)  # run for a specified number of trials
-		    succes_rate = a.succesfull_trials*1./500 # Calculate succes rate
-		    results.append((gamma,alpha,epsilon,succes_rate)) # Append to results
-		    if(gamma == .95 and alpha == .03 and epsilon == .01): # print out Q-matrix of optimal parameter configuration
+		    sim.run(n_trials=100)  # run for a specified number of trials
+		    succes_rate = a.succesfull_trials*1./100 # Calculate succes rate
+		    avgpenalty = a.penalty*1./100 # average number of penalties per ride
+		    results.append((gamma,alpha,epsilon,succes_rate,avgpenalty)) # Append to results
+		    if(gamma == .95 and alpha == .03 and epsilon == .01	): # print out Q-matrix of optimal parameter configuration
 		    	with open("Q-Matrix.tex","w") as table_file:
-				table_file.write(a.QMatrix.to_latex(na_rep='None'))		    						   
+				table_file.write(a.QMatrix.to_latex(na_rep='None',longtable=True))		    						   
     print results
 
 if __name__ == '__main__':
