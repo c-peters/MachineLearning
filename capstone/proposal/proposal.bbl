@@ -1,0 +1,18 @@
+\begin{thebibliography}{1}
+
+\bibitem{bekkerman2004ace}
+R.~Bekkerman, A.~McCallum, and G.~Huang, ``Automatic categorization of email
+  into folders: Benchmark experiments on enron and sri corpora,'' {\em Center
+  for Intelligent Information Retrieval, Technical Report IR}, vol.~418, 2004.
+
+\bibitem{klimt2004enron}
+B.~Klimt and Y.~Yang, ``The enron corpus: A new dataset for email
+  classification research,'' in {\em European Conference on Machine Learning},
+  pp.~217--226, Springer, 2004.
+
+\bibitem{Joachims}
+T.~Joachims, {\em Learning to Classify Text Using Support Vector Machines:
+  Methods, Theory and Algorithms}.
+\newblock Norwell, MA, USA: Kluwer Academic Publishers, 2002.
+
+\end{thebibliography}

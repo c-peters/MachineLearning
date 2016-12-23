@@ -81,7 +81,7 @@ def run():
 		    e.set_primary_agent(a, enforce_deadline=True)  # specify agent to track
 
 		    # Now simulate it
-		    sim = Simulator(e, update_delay=.01, display=False)  # create simulator (uses pygame when display=True, if available)
+		    sim = Simulator(e, update_delay=.5, display=True)  # create simulator (uses pygame when display=True, if available)
 
 		    sim.run(n_trials=100)  # run for a specified number of trials
 		    succes_rate = a.succesfull_trials*1./100 # Calculate succes rate
